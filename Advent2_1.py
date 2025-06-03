@@ -34,7 +34,7 @@ for row in report:                                           #for each row
             safety_matrix.append("Unsafe")
             break
 
-
+        
         if j == 0:                                          #if we are at the first value in the row
             if difference > 0:                              #let's determine whether we should continue to increase or decrease as we progress through the row based on the first difference
                 k = 1

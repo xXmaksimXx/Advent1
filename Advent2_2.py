@@ -1,26 +1,31 @@
-def removed_attempt(list, column):                                 #initialize the column counter (this brings us to the individual value in the row)
+#https://adventofcode.com/2024/day/2
+
+def removed_attempt(list, column):                                #this is a function that is used when the main body runs into an issue with a line of data once
     print("We ran into an issue. Let's initiate the Problem Dampener on the following list: " + str(list))
     new_col = column - 1
-
-    new_list = list
-    del new_list[column]
-
     output = 0
     k = 0
-
+    new_list = list                                              #makes a copy of the list
+    del new_list[column]                                         #deletes the last the nth value in the list where n is the column 
    
     print("Identified that the " + str(column) + "th/rd/st value as the potential problem. This problem value is " + str(list[new_col]) + ". Removing potential problem. The list is now: " + str(new_list))
+
+
 
     for value in new_list[new_col:]:                                          #for each value in the column         
         
         print("We are going to check the value " + str(new_list[new_col]))                         
                                                        
-        if new_col == len(new_list):                          #if the column counter is the same length as the row, break out of the of this code because 
+        if new_col == len(new_list):                          #if the column counter is the same length as the row, break out of the of this code because we have reached the end of the list
             print(str(new_list[new_col]) + " is the last value in the current row:" + str(list) )
             print("This line is safe!")
-            break                                        
+            break   
+
+        #START LOOKING AT THE DIFFERENCES BETWEEN ADJACENT LIST VALUES
         #print("Checking the difference between " + str(new_list[new_col - 1]) + " and " + str(new_list[new_col]))
         difference = new_list[new_col - 1] - new_list[new_col]       #"difference" is the difference between the current value in the array row and the next value 
+
+
 
         if abs(difference) > 3:                             #if the magnitude of difference is too high, break out
             print("We have determined that the difference was too high.")
@@ -52,7 +57,7 @@ def removed_attempt(list, column):                                 #initialize t
                 print("The difference was 0! Yikes!")
                 output = 1
                 break
-        new_col += 1
+        new_col += 1                                    #increments the column count
     return output
 
 row = []
@@ -66,7 +71,7 @@ with open(r"C:\Users\mpecherskiy\Documents\CS\Python\Input_files\Advent_2_test.t
 
 i = 0                      #initialize the row counter
 k = 0
-difference = 0             #initialize difference value 
+difference = 0            
 safety_matrix = []
 safety_report = {}
     
@@ -130,7 +135,7 @@ for row in report:                                           #for each row
     j = 0
 
 
-for entry in safety_matrix:
+for entry in safety_matrix:                                 #creates a dictionary counting the number of safe list and unsafe lists
     if entry not in safety_report.keys():
         safety_report[entry] = 1
     else:
